@@ -140,7 +140,7 @@ const Contact = () => {
             Get in <span className="text-[#EB0028]">Touch</span>
           </h2>
           <p className="body-text max-w-4xl mx-auto px-2">
-            Have questions about the event? Want to get involved? We'd love to hear from you!
+            Have questions about the event? Want to get involved? We&apos;d love to hear from you!
           </p>
         </div>
 

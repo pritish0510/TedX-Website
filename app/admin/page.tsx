@@ -10,13 +10,15 @@ import { Loader2, Download, Users, Search, Filter } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface Registration {
-  _id: string;
+  id?: number | string;
+  _id?: string;
   name: string;
   email: string;
   phone: string;
   role: string;
   message: string;
-  createdAt: string;
+  created_at?: string;
+  createdAt?: string;
 }
 
 const AdminPage = () => {
@@ -42,10 +44,29 @@ const AdminPage = () => {
     }
   };
 
+  const fetchRegistrations = async () => {
+    try {
+      const response = await fetch('/api/register');
+      if (response.ok) {
+        const data = await response.json();
+        setRegistrations(data.registrations || []);
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to fetch registrations",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       fetchRegistrations();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   useEffect(() => {
@@ -66,24 +87,6 @@ const AdminPage = () => {
     setFilteredRegistrations(filtered);
   }, [registrations, searchTerm, filterRole]);
 
-  const fetchRegistrations = async () => {
-    try {
-      const response = await fetch('/api/register');
-      if (response.ok) {
-        const data = await response.json();
-        setRegistrations(data);
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to fetch registrations",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const exportToCSV = () => {
     const headers = ['Name', 'Email', 'Phone', 'Role', 'Message', 'Registration Date'];
     const csvContent = [
@@ -94,7 +97,7 @@ const AdminPage = () => {
         `"${reg.phone}"`,
         `"${reg.role}"`,
         `"${reg.message.replace(/"/g, '""')}"`,
-        `"${new Date(reg.createdAt).toLocaleString()}"`,
+        `"${new Date(reg.created_at || reg.createdAt || '').toLocaleString()}"`,
       ].join(','))
     ].join('\n');
 
@@ -255,7 +258,7 @@ const AdminPage = () => {
                 </thead>
                 <tbody>
                   {filteredRegistrations.map((registration) => (
-                    <tr key={registration._id} className="border-b hover:bg-gray-50">
+                    <tr key={registration.id || registration._id} className="border-b hover:bg-gray-50">
                       <td className="py-3 px-4 font-medium">{registration.name}</td>
                       <td className="py-3 px-4">{registration.email}</td>
                       <td className="py-3 px-4">{registration.phone}</td>
@@ -263,7 +266,7 @@ const AdminPage = () => {
                         <Badge variant="secondary">{registration.role}</Badge>
                       </td>
                       <td className="py-3 px-4 text-sm text-gray-600">
-                        {new Date(registration.createdAt).toLocaleDateString()}
+                        {new Date(registration.created_at || registration.createdAt || '').toLocaleDateString()}
                       </td>
                       <td className="py-3 px-4 max-w-xs">
                         <p className="text-sm text-gray-600 line-clamp-2">

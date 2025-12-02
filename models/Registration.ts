@@ -1,49 +1,56 @@
-import mongoose from 'mongoose';
+export type UserRole = 'Student' | 'Faculty' | 'Guest' | 'Professional';
 
 export interface IRegistration {
+  id?: number;
   name: string;
   email: string;
   phone: string;
-  role: 'Student' | 'Faculty' | 'Guest' | 'Professional';
+  role: UserRole;
   message: string;
-  createdAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
-const RegistrationSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Name is required'],
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    trim: true,
-    lowercase: true,
-    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email'],
-  },
-  phone: {
-    type: String,
-    required: [true, 'Phone number is required'],
-    trim: true,
-  },
-  role: {
-    type: String,
-    required: [true, 'Role is required'],
-    enum: ['Student', 'Faculty', 'Guest', 'Professional'],
-  },
-  message: {
-    type: String,
-    required: [true, 'Please tell us why you want to attend'],
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-}, {
-  timestamps: true,
-});
+export interface RegistrationInput {
+  name: string;
+  email: string;
+  phone: string;
+  role: UserRole;
+  message: string;
+}
 
-const Registration = mongoose.models.Registration || mongoose.model<IRegistration>('Registration', RegistrationSchema);
-export default Registration;
+const VALID_ROLES: UserRole[] = ['Student', 'Faculty', 'Guest', 'Professional'];
+
+// Validation helper
+export function validateRegistration(data: RegistrationInput): { valid: boolean; errors: string[] } {
+  const errors: string[] = [];
+
+  if (!data.name || data.name.trim().length === 0) {
+    errors.push('Name is required');
+  }
+
+  if (!data.email || data.email.trim().length === 0) {
+    errors.push('Email is required');
+  } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
+    errors.push('Please enter a valid email');
+  }
+
+  if (!data.phone || data.phone.trim().length === 0) {
+    errors.push('Phone number is required');
+  } else if (!/^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/.test(data.phone)) {
+    errors.push('Please enter a valid phone number');
+  }
+
+  if (!data.role || !VALID_ROLES.includes(data.role)) {
+    errors.push('Please select a valid role');
+  }
+
+  if (!data.message || data.message.trim().length === 0) {
+    errors.push('Please tell us why you want to attend');
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors
+  };
+}

@@ -1,47 +1,63 @@
-import mongoose from 'mongoose';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import ws from 'ws';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/tedx-srmist';
+// Configure Neon for serverless environments
+neonConfig.webSocketConstructor = ws;
 
-if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
+const DATABASE_URL = process.env.DATABASE_URL;
+
+if (!DATABASE_URL) {
+  throw new Error('Please define the DATABASE_URL environment variable inside .env.local');
 }
 
-interface MongooseCache {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-}
+// Create a connection pool
+const pool = new Pool({ connectionString: DATABASE_URL });
 
-declare global {
-  var mongoose: MongooseCache;
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
-
-async function dbConnect(): Promise<typeof mongoose> {
-  if (cached.conn) {
-    return cached.conn;
-  }
-
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts);
-  }
-
+// Initialize database tables
+export async function initDatabase() {
+  const client = await pool.connect();
   try {
-    cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    throw e;
-  }
+    // Create registrations table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS registrations (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        phone VARCHAR(20) NOT NULL,
+        role VARCHAR(50) NOT NULL CHECK (role IN ('Student', 'Faculty', 'Guest', 'Professional')),
+        message TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
 
-  return cached.conn;
+    // Create contacts table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS contacts (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        subject VARCHAR(500) NOT NULL,
+        message TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // Create indexes for better performance
+    await client.query(`
+      CREATE INDEX IF NOT EXISTS idx_registrations_email ON registrations(email);
+      CREATE INDEX IF NOT EXISTS idx_registrations_created_at ON registrations(created_at DESC);
+      CREATE INDEX IF NOT EXISTS idx_contacts_created_at ON contacts(created_at DESC);
+    `);
+
+    console.log('Database initialized successfully');
+  } catch (error) {
+    console.error('Error initializing database:', error);
+    throw error;
+  } finally {
+    client.release();
+  }
 }
 
-export default dbConnect;
+export default pool;

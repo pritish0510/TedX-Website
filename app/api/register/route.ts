@@ -1,55 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server';
-import dbConnect from '@/lib/db';
-import Registration from '@/models/Registration';
+import pool, { initDatabase } from '@/lib/db';
+import { RegistrationInput, validateRegistration } from '@/models/Registration';
 import { sendRegistrationConfirmation } from '@/lib/email';
+
+// Initialize database on first request
+let dbInitialized = false;
 
 export async function POST(request: NextRequest) {
   try {
-    await dbConnect();
-    
-    const body = await request.json();
+    // Initialize database if not already done
+    if (!dbInitialized) {
+      await initDatabase();
+      dbInitialized = true;
+    }
+
+    const body: RegistrationInput = await request.json();
     const { name, email, phone, role, message } = body;
 
-    // Validate required fields
-    if (!name || !email || !phone || !role || !message) {
+    // Validate input
+    const validation = validateRegistration({ name, email, phone, role, message });
+    if (!validation.valid) {
       return NextResponse.json(
-        { error: 'All fields are required' },
+        { error: validation.errors.join(', ') },
         { status: 400 }
       );
     }
 
     // Check if email already registered
-    const existingRegistration = await Registration.findOne({ email });
-    if (existingRegistration) {
+    const existingResult = await pool.query(
+      'SELECT id FROM registrations WHERE email = $1',
+      [email.trim().toLowerCase()]
+    );
+
+    if (existingResult.rows.length > 0) {
       return NextResponse.json(
         { error: 'This email is already registered for the event' },
         { status: 400 }
       );
     }
 
-    // Create new registration
-    const registration = new Registration({
-      name,
-      email,
-      phone,
-      role,
-      message,
-    });
+    // Insert registration into database
+    const result = await pool.query(
+      `INSERT INTO registrations (name, email, phone, role, message)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id, name, email, phone, role, message, created_at`,
+      [name.trim(), email.trim().toLowerCase(), phone.trim(), role, message.trim()]
+    );
 
-    await registration.save();
+    const registration = result.rows[0];
 
     // Send confirmation email
     try {
       await sendRegistrationConfirmation(email, name);
     } catch (emailError) {
       console.error('Error sending confirmation email:', emailError);
-      // Continue even if email fails
+      // Continue even if email fails - registration is still successful
     }
 
     return NextResponse.json(
       { 
         message: 'Registration successful! Confirmation email sent.',
-        registrationId: registration._id 
+        registrationId: registration.id
       },
       { status: 201 }
     );
@@ -57,21 +68,32 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error. Please try again later.' },
       { status: 500 }
     );
   }
 }
 
-export async function GET() {
+// GET endpoint to fetch all registrations (for admin)
+export async function GET(request: NextRequest) {
   try {
-    await dbConnect();
-    
-    const registrations = await Registration.find()
-      .sort({ createdAt: -1 })
-      .select('-__v');
+    // Initialize database if not already done
+    if (!dbInitialized) {
+      await initDatabase();
+      dbInitialized = true;
+    }
 
-    return NextResponse.json(registrations);
+    const result = await pool.query(
+      'SELECT id, name, email, phone, role, message, created_at FROM registrations ORDER BY created_at DESC'
+    );
+
+    return NextResponse.json(
+      { 
+        registrations: result.rows,
+        total: result.rows.length
+      },
+      { status: 200 }
+    );
 
   } catch (error) {
     console.error('Error fetching registrations:', error);

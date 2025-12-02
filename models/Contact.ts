@@ -1,43 +1,44 @@
-import mongoose from 'mongoose';
-
 export interface IContact {
+  id?: number;
   name: string;
   email: string;
   subject: string;
   message: string;
-  createdAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
-const ContactSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Name is required'],
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: [true, 'Email is required'],
-    trim: true,
-    lowercase: true,
-    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email'],
-  },
-  subject: {
-    type: String,
-    required: [true, 'Subject is required'],
-    trim: true,
-  },
-  message: {
-    type: String,
-    required: [true, 'Message is required'],
-    trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-}, {
-  timestamps: true,
-});
+export interface ContactInput {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
 
-const Contact = mongoose.models.Contact || mongoose.model<IContact>('Contact', ContactSchema);
-export default Contact;
+// Validation helper
+export function validateContact(data: ContactInput): { valid: boolean; errors: string[] } {
+  const errors: string[] = [];
+
+  if (!data.name || data.name.trim().length === 0) {
+    errors.push('Name is required');
+  }
+
+  if (!data.email || data.email.trim().length === 0) {
+    errors.push('Email is required');
+  } else if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
+    errors.push('Please enter a valid email');
+  }
+
+  if (!data.subject || data.subject.trim().length === 0) {
+    errors.push('Subject is required');
+  }
+
+  if (!data.message || data.message.trim().length === 0) {
+    errors.push('Message is required');
+  }
+
+  return {
+    valid: errors.length === 0,
+    errors
+  };
+}

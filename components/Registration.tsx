@@ -131,13 +131,13 @@ const Registration = () => {
     return (
       <section id="register" ref={sectionRef} className="section-padding bg-transparent">
         <div className="max-w-4xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
-          <Card className="text-center p-6 sm:p-8 border-0 shadow-xl bg-neutral-900 border border-teal-400 rounded-none">
+          <Card className="text-center p-6 sm:p-8 shadow-xl bg-neutral-900 border border-teal-400 rounded-none">
             <div className="w-12 h-12 sm:w-16 sm:h-16 bg-teal-400 rounded-none flex items-center justify-center mx-auto mb-4 sm:mb-6">
               <Check className="w-6 h-6 sm:w-8 sm:h-8 text-neutral-900" />
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Registration Successful!</h2>
             <p className="text-base sm:text-lg text-neutral-200 mb-6">
-              Thank you for registering for TED<sup>x</sup> SRMIST NCR Ghaziabad. We've sent a confirmation email with all the event details.
+              Thank you for registering for TED<sup>x</sup> SRMIST NCR Ghaziabad. We&apos;ve sent a confirmation email with all the event details.
             </p>
             <Button
               onClick={() => setIsSuccess(false)}
@@ -280,7 +280,7 @@ const Registration = () => {
 
             <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-neutral-950 border border-teal-400 rounded-none">
               <p className="text-xs sm:text-sm text-teal-400">
-                <strong>Note:</strong> Registration is completely free. You'll receive a confirmation email with event details and your entry pass. Please register early as seats are limited.
+                <strong>Note:</strong> Registration is completely free. You&apos;ll receive a confirmation email with event details and your entry pass. Please register early as seats are limited.
               </p>
             </div>
           </CardContent>

@@ -21,7 +21,7 @@ const config: Config = {
         DEFAULT: '0px',
       },
       colors: {
-        background: '#0B1120',
+        background: 'neutral-950',
         foreground: '#E2E8F0',
         card: {
           DEFAULT: '#111827',
@@ -54,14 +54,42 @@ const config: Config = {
         border: '#111827',
         input: '#111827',
         ring: '#EB0028',
-        // Custom Elysium Palette
-        'elysium-main': '#0B1120',
-        'elysium-card': '#111827',
-        'elysium-text': '#E2E8F0',
-        'elysium-heading': '#FFFFFF',
-        'elysium-gold': '#FFD700',
-        'elysium-teal': '#5EEAD4',
-        'ted-red': '#EB0028',
+
+        // TEDx Brand Colors
+        'tedx': {
+          red: '#EB0028',
+          'red-dark': '#c41e0f',
+          'red-darker': '#c71b23',
+        },
+
+        // Accent Colors
+        'teal': {
+          DEFAULT: '#5EEAD4',
+          light: '#2DD4BF',
+        },
+
+        // Background Neutrals
+        'neutral': {
+          950: '#0a0a0a',
+          900: '#171717',
+          800: '#262626',
+          700: '#404040',
+          600: '#525252',
+          500: '#737373',
+          400: '#a3a3a3',
+          300: '#d4d4d4',
+          200: '#e5e5e5',
+          100: '#f5f5f5',
+        },
+
+        // Sponsorship Tier Colors
+        'sponsor': {
+          title: '#FFD700',      // Gold
+          diamond: '#E5E7EB',    // Light Gray
+          platinum: '#9CA3AF',   // Medium Gray
+          gold: '#FCD34D',       // Yellow Gold
+          silver: '#94A3B8',     // Silver Gray
+        },
       },
       backgroundImage: {
         'none': 'none',
