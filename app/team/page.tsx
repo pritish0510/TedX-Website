@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import NextImage from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { gsap } from 'gsap';
@@ -10,50 +11,69 @@ if (typeof window !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 }
 
+// Helper to generate member objects
+const createMember = (name: string, role: string, imagePath: string) => ({
+    name,
+    role,
+    image: imagePath
+});
+
 const teamSections = [
     {
         title: 'Core Organizing Team',
         members: [
-            { name: 'Alex Johnson', role: 'Lead Organizer', image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop' },
-            { name: 'Sarah Chen', role: 'Co-Organizer', image: 'https://images.unsplash.com/photo-1573496359-136d47552640?w=400&h=400&fit=crop' },
-            { name: 'Michael Smith', role: 'Curator', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop' },
+            createMember('', 'Lead Organizer', '/images/leads/6.png'),
+            createMember('', 'Co-Organizer', '/images/leads/1.png'),
+            createMember('', 'Curator', '/images/leads/2.png'),
+            createMember('', 'Technical Head', '/images/leads/5.png'),
+            createMember('', 'Head of Operations', '/images/leads/4.png'),
+            createMember('', 'Head of Marketing', '/images/leads/6.png'), // Note: Image 6 used twice in user snippet, keeping as is
+            createMember('', 'Head of Design', '/images/leads/7.png'),
+            createMember('', 'Head of Production', '/images/leads/8.png'),
         ]
     },
     {
-        title: 'Curation & Content',
+        title: 'Curation & Technical',
         members: [
-            { name: 'Emily Davis', role: 'Content Lead', image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop' },
-            { name: 'David Wilson', role: 'Speaker Manager', image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop' },
-            { name: 'Jessica Brown', role: 'Editorial Lead', image: 'https://images.unsplash.com/photo-1598550874175-4d7112ee7f38?w=400&h=400&fit=crop' },
+            createMember('Member 1', 'Curation Team', '/images/members/1.png'),
+            createMember('Member 2', 'Curation Team', '/images/members/2.png'),
+            createMember('Member 3', 'Technical Team', '/images/members/3.png'),
+            createMember('Member 4', 'Technical Team', '/images/members/4.png'),
+            createMember('Member 5', 'Web Development', '/images/members/5.png'),
+            createMember('Member 6', 'Web Development', '/images/members/6.png'),
         ]
     },
     {
-        title: 'Design & Marketing',
+        title: 'Design & Media',
         members: [
-            { name: 'Chris Lee', role: 'Design Head', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop' },
-            { name: 'Amanda White', role: 'Marketing Lead', image: 'https://images.unsplash.com/photo-1619895862022-09114b41f16f?w=400&h=400&fit=crop' },
-            { name: 'Ryan Taylor', role: 'Social Media', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop' },
+            createMember('Member 7', 'Design Team', '/images/members/7.png'),
+            createMember('Member 8', 'Design Team', '/images/members/8.png'),
+            createMember('Member 9', 'Video Editing', '/images/members/9.png'),
+            createMember('Member 10', 'Video Editing', '/images/members/10.png'),
+            createMember('Member 11', 'Social Media', '/images/members/11.png'),
+            createMember('Member 12', 'Social Media', '/images/members/12.png'),
         ]
     },
     {
-        title: 'Production & Logistics',
+        title: 'Operations & Logistics',
         members: [
-            { name: 'Daniel Martin', role: 'Production Head', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop' },
-            { name: 'Olivia Thompson', role: 'Logistics Lead', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop' },
+            createMember('Member 13', 'Operations', '/images/members/13.png'),
+            createMember('Member 14', 'Operations', '/images/members/14.png'),
+            createMember('Member 15', 'Logistics', '/images/members/15.png'),
+            createMember('Member 16', 'Logistics', '/images/members/16.png'),
+            createMember('Member 17', 'Hospitality', '/images/members/17.png'),
+            createMember('Member 18', 'Hospitality', '/images/members/18.png'),
         ]
     },
     {
-        title: 'Partnerships',
+        title: 'Sponsorship & Marketing',
         members: [
-            { name: 'James Anderson', role: 'Sponsorship Lead', image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&h=400&fit=crop' },
-            { name: 'Sophia Martinez', role: 'Partner Relations', image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop' },
-        ]
-    },
-    {
-        title: 'Volunteers',
-        members: [
-            { name: 'Kevin Robinson', role: 'Volunteer Lead', image: 'https://images.unsplash.com/photo-1522075469751-3a3694c60e9e?w=400&h=400&fit=crop' },
-            { name: 'Laura Clark', role: 'Coordinator', image: 'https://images.unsplash.com/photo-1554151228-14d9def656ec?w=400&h=400&fit=crop' },
+            createMember('Member 19', 'Sponsorship', '/images/members/19.png'),
+            createMember('Member 20', 'Sponsorship', '/images/members/20.png'),
+            createMember('Member 21', 'Marketing', '/images/members/21.png'),
+            createMember('Member 22', 'Marketing', '/images/members/22.png'),
+            createMember('Member 23', 'Public Relations', '/images/members/23.png'),
+            createMember('Member 24', 'Public Relations', '/images/members/24.png'),
         ]
     }
 ];
@@ -85,8 +105,6 @@ export default function TeamPage() {
                     }
                 );
             });
-
-            // Card Hover Effects (already handled by CSS, but we can add GSAP for smoothness if needed)
         });
 
         return () => ctx.revert();
@@ -95,48 +113,55 @@ export default function TeamPage() {
     return (
         <>
             <Navbar />
-            <main className="bg-[#0B1120] min-h-screen pt-24 pb-20">
+            <main className="min-h-screen pt-24 pb-20 bg-transparent">
                 {/* Hero Section */}
                 <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-16 sm:mb-24 text-center">
                     <h1 className="team-hero-title heading-xl">
-                        Our <span className="text-[#EB0028] border-b-4 border-[#FFD700]">Team</span>
+                        Our <span className="text-[#EB0028] border-b-4 border-yellow-500">Team</span>
                     </h1>
                     <p className="body-text text-lg sm:text-xl max-w-2xl mx-auto">
-                        The passionate minds behind TEDxSRMIST NCR. Dedicated to bringing ideas worth spreading to our community.
+                        The passionate minds behind TED<sup>x</sup> <span className="text-white">SRMIST Delhi NCR</span>. Dedicated to bringing ideas worth spreading to our community.
                     </p>
                 </section>
 
                 {/* Team Sections */}
                 <div className="space-y-16 sm:space-y-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                    {teamSections.map((section, index) => (
-                        <section key={index} className="team-section">
-                            <h2 className="text-3xl sm:text-4xl font-bold text-[#EB0028] mb-8 sm:mb-12 border-l-4 border-[#FFD700] pl-4">
-                                {section.title}
-                            </h2>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                                {section.members.map((member, mIndex) => (
-                                    <div
-                                        key={mIndex}
-                                        className="group bg-[#111827] p-0 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(94,234,212,0.4)] border border-transparent hover:border-[#5EEAD4] relative overflow-hidden"
-                                    >
-                                        <div className="aspect-square overflow-hidden">
-                                            <img
-                                                src={member.image}
-                                                alt={member.name}
-                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                                            />
+                    {teamSections.map((section, index) => {
+                        const isCoreTeam = index === 0;
+
+                        return (
+                            <section key={index} className="team-section">
+                                <h2 className="text-3xl sm:text-4xl font-bold text-[#EB0028] mb-8 sm:mb-12 border-l-4 border-yellow-500 pl-4">
+                                    {section.title}
+                                </h2>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+                                    {section.members.map((member, mIndex) => (
+                                        <div
+                                            key={mIndex}
+                                            className={`group bg-neutral-900 p-0 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] border border-neutral-800 hover:border-teal-400 relative overflow-hidden ${isCoreTeam ? 'aspect-[4/5]' : ''}`}
+                                        >
+                                            <div className="aspect-[4/5] overflow-hidden relative">
+                                                <NextImage
+                                                    src={member.image}
+                                                    alt={member.role}
+                                                    fill
+                                                    className={`object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0 ${isCoreTeam ? 'brightness-90 group-hover:brightness-100' : ''}`}
+                                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                                                />
+                                            </div>
+
+                                            <div className="p-5">
+                                                {member.name && <h3 className="text-lg font-bold text-white mb-1">{member.name}</h3>}
+                                                <p className="text-yellow-500 font-medium text-xs uppercase tracking-wider">{member.role}</p>
+                                            </div>
+                                            <div className="absolute bottom-0 left-0 w-0 h-1 bg-[#EB0028] transition-all duration-300 group-hover:w-full"></div>
                                         </div>
-                                        <div className="p-6">
-                                            <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                                            <p className="text-[#FFD700] font-medium text-sm uppercase tracking-wider">{member.role}</p>
-                                        </div>
-                                        {/* Hover Overlay Line */}
-                                        <div className="absolute bottom-0 left-0 w-0 h-1 bg-[#EB0028] transition-all duration-300 group-hover:w-full"></div>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-                    ))}
+                                    ))}
+                                </div>
+                            </section>
+                        );
+                    })}
                 </div>
             </main>
             <Footer />

@@ -126,7 +126,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="section-padding bg-[#0B1120] relative overflow-hidden">
+    <section id="contact" ref={sectionRef} className="section-padding bg-transparent relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-20 sm:top-40 left-10 sm:left-40 w-32 sm:w-48 md:w-72 h-32 sm:h-48 md:h-72 bg-[#EB0028] rounded-full blur-3xl"></div>
@@ -144,23 +144,24 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12">
+        {/* Contact Form and Contact Information - Side by Side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 mb-6 sm:mb-8 md:mb-12">
           {/* Contact Form */}
-          <Card ref={formRef} className="bg-[#111827] border border-transparent hover:border-[#EB0028] transition-all duration-300 rounded-none">
+          <Card ref={formRef} className="bg-neutral-900 border border-neutral-800 hover:border-[#EB0028] transition-all duration-300 rounded-none">
             <CardContent className="p-4 sm:p-6 md:p-8 lg:p-10">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Send us a Message</h3>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                    <Label htmlFor="name" className="text-xs sm:text-sm font-medium text-neutral-200">
                       Name *
                     </Label>
                     <Input
                       id="name"
                       {...register('name')}
                       placeholder="Your name"
-                      className="bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                      className="bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                     />
                     {errors.name && (
                       <p className="text-xs sm:text-sm text-red-600">{errors.name.message}</p>
@@ -168,7 +169,7 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                    <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-neutral-200">
                       Email *
                     </Label>
                     <Input
@@ -176,7 +177,7 @@ const Contact = () => {
                       type="email"
                       {...register('email')}
                       placeholder="your@email.com"
-                      className="bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                      className="bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                     />
                     {errors.email && (
                       <p className="text-xs sm:text-sm text-red-600">{errors.email.message}</p>
@@ -185,14 +186,14 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="subject" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                  <Label htmlFor="subject" className="text-xs sm:text-sm font-medium text-neutral-200">
                     Subject *
                   </Label>
                   <Input
                     id="subject"
                     {...register('subject')}
                     placeholder="What's this about?"
-                    className="bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                    className="bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                   />
                   {errors.subject && (
                     <p className="text-xs sm:text-sm text-red-600">{errors.subject.message}</p>
@@ -200,7 +201,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                  <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-neutral-200">
                     Message *
                   </Label>
                   <Textarea
@@ -208,7 +209,7 @@ const Contact = () => {
                     {...register('message')}
                     placeholder="Tell us more..."
                     rows={6}
-                    className="bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                    className="bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                   />
                   {errors.message && (
                     <p className="text-xs sm:text-sm text-red-600">{errors.message.message}</p>
@@ -233,87 +234,84 @@ const Contact = () => {
             </CardContent>
           </Card>
 
-          {/* Contact Information & Map */}
-          <div ref={infoRef} className="space-y-6 sm:space-y-8">
-            {/* Contact Info */}
-            <Card className="bg-[#111827] border border-transparent hover:border-[#5EEAD4] transition-all duration-300 rounded-none">
-              <CardContent className="p-4 sm:p-6 md:p-8 lg:p-10">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Contact Information</h3>
+          {/* Contact Information */}
+          <Card ref={infoRef} className="bg-neutral-900 border border-neutral-800 hover:border-teal-400 transition-all duration-300 rounded-none">
+            <CardContent className="p-4 sm:p-6 md:p-8 lg:p-10">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">Contact Information</h3>
 
-                <div className="space-y-4 sm:space-y-6">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#0B1120] border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Email</h4>
-                      <p className="text-[#94A3B8] text-xs sm:text-sm md:text-base">tedx@srmist.edu.in</p>
-                      <p className="text-[#94A3B8] text-xs sm:text-sm md:text-base">info@tedxsrmist.edu.in</p>
-                    </div>
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-neutral-950 border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
+                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
                   </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#0B1120] border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Phone</h4>
-                      <p className="text-[#94A3B8] text-xs sm:text-sm md:text-base">+91 9876543210</p>
-                      <p className="text-[#94A3B8] text-xs sm:text-sm md:text-base">+91 9876543211</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#0B1120] border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
-                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Address</h4>
-                      <p className="text-[#94A3B8] text-xs sm:text-sm md:text-base">
-                        SRM Institute of Science and Technology,<br />
-                        SRM IST NCR Campus, Delhi-Meerut Road,<br />
-                        Modinagar, Ghaziabad District,<br />
-                        Uttar Pradesh, 201204.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-[#0B1120] border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
-                      <Clock className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Office Hours</h4>
-                      <p className="text-[#94A3B8] text-xs sm:text-sm md:text-base">
-                        Monday - Friday: 9:00 AM - 6:00 PM<br />
-                        Saturday: 10:00 AM - 4:00 PM<br />
-                        Sunday: Closed
-                      </p>
-                    </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Email</h4>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">tedx@srmist.edu.in</p>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">info@tedxsrmist.edu.in</p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
 
-            {/* Embedded Map */}
-            <Card className="bg-[#111827] border border-transparent hover:border-[#5EEAD4] transition-all duration-300 rounded-none">
-              <CardContent className="p-0">
-                <div className="aspect-video w-full min-h-[200px] sm:min-h-[250px] md:min-h-[300px]">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.2916068848385!2d77.6148949!3d28.6828178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf3be6c7b1583%3A0x983e6e857f4b7e04!2sSRM%20Institute%20of%20Science%20and%20Technology%2C%20NCR%20Campus!5e0!3m2!1sen!2sin!4v1703842841234!5m2!1sen!2sin"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="rounded-none grayscale invert contrast-125"
-                  ></iframe>
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-neutral-950 border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
+                    <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Phone</h4>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">+91 9876543210</p>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">+91 9876543211</p>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-neutral-950 border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Address</h4>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">
+                      SRM Institute of Science and Technology,<br />
+                      SRM IST NCR Campus, Delhi-Meerut Road,<br />
+                      Modinagar, Ghaziabad District,<br />
+                      Uttar Pradesh, 201204.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-neutral-950 border border-[#EB0028] flex items-center justify-center flex-shrink-0 rounded-none">
+                    <Clock className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-[#EB0028]" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Office Hours</h4>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">
+                      Monday - Friday: 9:00 AM - 6:00 PM<br />
+                      Saturday: 10:00 AM - 4:00 PM<br />
+                      Sunday: Closed
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* Map - Full Width */}
+        <Card className="bg-neutral-900 border border-neutral-800 hover:border-teal-400 transition-all duration-300 rounded-none">
+          <CardContent className="p-0">
+            <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3496.388804727159!2d77.5347658753647!3d28.797485275574996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf51f5aadb701%3A0x39add03eb3926d26!2sSRM%20Institute%20of%20Science%20and%20Technology%20Delhi%20NCR%20Campus!5e0!3m2!1sen!2sin!4v1764656660021!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-none"
+              ></iframe>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </section>
   );

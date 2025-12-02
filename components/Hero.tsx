@@ -137,7 +137,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen bg-[#0B1120] flex items-center justify-center overflow-hidden section-padding">
+    <section className="relative min-h-screen bg-transparent flex items-center justify-center overflow-hidden section-padding">
       {/* Subtle Starry Background (CSS generated) */}
       <div className="absolute inset-0 pointer-events-none opacity-20" style={{
         backgroundImage: 'radial-gradient(white 1px, transparent 1px)',
@@ -149,11 +149,8 @@ export default function Hero() {
         {/* TEDx Logo and Title */}
         <div className="mb-8 sm:mb-12">
           <h1 className="hero-title heading-xl">
-            TED<span className="text-[#EB0028]">x</span>
+            TED<sup className="text-[#EB0028] text-3xl md:text-5xl ml-1">x</sup> <span className="text-white">SRMIST Delhi NCR</span>
           </h1>
-          <h2 className="hero-title text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2 sm:mb-4">
-            SRMIST NCR Ghaziabad
-          </h2>
           <p className="hero-subtitle body-text text-xl font-medium mt-6">
             Theme: <span className="text-white font-bold">Elysium</span> (Mystical Dark Paradise)
           </p>
@@ -161,19 +158,19 @@ export default function Hero() {
 
         {/* Event Details */}
         <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-4xl mx-auto">
-          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-[#E2E8F0]">
+          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-neutral-200">
             <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-[#EB0028]" />
             <span className="text-sm sm:text-base md:text-lg font-bold">January 21, 2026</span>
           </div>
-          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-[#E2E8F0]">
+          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-neutral-200">
             <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-[#EB0028]" />
             <span className="text-sm sm:text-base md:text-lg font-bold">10:00 AM</span>
           </div>
-          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-[#E2E8F0]">
+          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-neutral-200">
             <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#EB0028]" />
             <span className="text-sm sm:text-base md:text-lg font-bold">SRM Auditorium</span>
           </div>
-          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-[#E2E8F0]">
+          <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-neutral-200">
             <Users className="w-5 h-5 sm:w-6 sm:h-6 text-[#EB0028]" />
             <span className="text-sm sm:text-base md:text-lg font-bold">200+ Attendees</span>
           </div>
@@ -193,12 +190,12 @@ export default function Hero() {
             ].map((item, index) => (
               <div
                 key={item.label}
-                className="countdown-card bg-[#111827] p-3 sm:p-4 md:p-6 hover:border hover:border-[#5EEAD4] transition-all duration-300 rounded-none"
+                className="countdown-card bg-neutral-900 border border-neutral-800 p-3 sm:p-4 md:p-6 hover:border-teal-400 hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all duration-300 rounded-none"
               >
                 <div className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2 font-mono">
                   {String(item.value).padStart(2, '0')}
                 </div>
-                <div className="text-xs sm:text-sm md:text-base text-[#94A3B8] uppercase tracking-wider font-bold">
+                <div className="text-xs sm:text-sm md:text-base text-neutral-400 uppercase tracking-wider font-bold">
                   {item.label}
                 </div>
               </div>
@@ -210,13 +207,13 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
           <a
             href="#register"
-            className="elysium-btn w-full sm:w-auto bg-[#EB0028] hover:bg-[#c40022] text-white px-8 py-4 text-lg font-bold transition-all duration-300 text-center rounded-none"
+            className="elysium-btn w-full sm:w-auto bg-[#EB0028] hover:bg-[#c71b23] text-white px-8 py-4 text-lg font-bold transition-all duration-300 text-center rounded-none"
           >
             Enter Elysium
           </a>
           <a
             href="#about"
-            className="elysium-btn w-full sm:w-auto border-2 border-[#111827] bg-[#111827] hover:border-[#5EEAD4] text-white px-8 py-4 text-lg font-bold transition-all duration-300 text-center rounded-none"
+            className="elysium-btn w-full sm:w-auto border-2 border-neutral-800 bg-neutral-900 hover:border-teal-400 text-white px-8 py-4 text-lg font-bold transition-all duration-300 text-center rounded-none"
           >
             Discover Paradise
           </a>

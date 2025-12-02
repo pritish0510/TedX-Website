@@ -207,15 +207,15 @@ const Schedule = () => {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'talk': return 'bg-[#EB0028] text-white';
-      case 'break': return 'bg-[#5EEAD4] text-[#0B1120]';
-      case 'ceremony': return 'bg-[#FFD700] text-[#0B1120]';
-      case 'panel': return 'bg-[#E2E8F0] text-[#0B1120]';
+      case 'break': return 'bg-teal-400 text-neutral-900';
+      case 'ceremony': return 'bg-yellow-500 text-neutral-900';
+      case 'panel': return 'bg-neutral-200 text-neutral-900';
       default: return 'bg-gray-500 text-white';
     }
   };
 
   return (
-    <section id="schedule" ref={sectionRef} className="section-padding bg-[#0B1120] overflow-hidden">
+    <section id="schedule" ref={sectionRef} className="section-padding bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
@@ -235,7 +235,7 @@ const Schedule = () => {
               {scheduleItems.map((item, index) => (
                 <Card
                   key={index}
-                  className="flex-shrink-0 w-64 xs:w-72 sm:w-80 bg-[#111827] border border-transparent hover:border-[#5EEAD4] cursor-pointer transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(94,234,212,0.4)] rounded-none"
+                  className="flex-shrink-0 w-64 xs:w-72 sm:w-80 bg-neutral-900 border border-neutral-800 hover:border-teal-400 cursor-pointer transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] rounded-none"
                 >
                   <CardContent className="p-4 sm:p-6 md:p-8">
                     <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
@@ -255,20 +255,20 @@ const Schedule = () => {
                     {item.speaker && (
                       <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                         <User size={16} className="sm:w-[18px] sm:h-[18px] text-[#EB0028] flex-shrink-0" />
-                        <span className="text-[#E2E8F0] font-medium text-sm sm:text-base">{item.speaker}</span>
+                        <span className="text-neutral-200 font-medium text-sm sm:text-base">{item.speaker}</span>
                       </div>
                     )}
 
                     <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                       <MapPin size={16} className="sm:w-[18px] sm:h-[18px] text-[#EB0028] flex-shrink-0" />
-                      <span className="text-[#94A3B8] text-sm sm:text-base">{item.location}</span>
+                      <span className="text-neutral-400 text-sm sm:text-base">{item.location}</span>
                     </div>
 
-                    <div className="text-xs sm:text-sm text-[#94A3B8] mb-3 sm:mb-4 font-medium">
+                    <div className="text-xs sm:text-sm text-neutral-400 mb-3 sm:mb-4 font-medium">
                       Duration: {item.duration}
                     </div>
 
-                    <p className="text-[#94A3B8] text-xs sm:text-sm leading-relaxed">
+                    <p className="text-neutral-400 text-xs sm:text-sm leading-relaxed">
                       {item.description}
                     </p>
                   </CardContent>
@@ -279,7 +279,7 @@ const Schedule = () => {
 
           {/* Scroll indicator */}
           <div className="text-center mt-4 sm:mt-6 md:mt-8">
-            <div className="inline-flex items-center gap-2 sm:gap-3 text-[#94A3B8] text-xs sm:text-sm">
+            <div className="inline-flex items-center gap-2 sm:gap-3 text-neutral-400 text-xs sm:text-sm">
               <span>Scroll horizontally to view all sessions</span>
               <div className="flex gap-1">
                 <div className="w-2 h-2 bg-[#EB0028] animate-bounce"></div>
@@ -292,21 +292,21 @@ const Schedule = () => {
 
         {/* Quick Overview */}
         <div ref={statsRef} className="mt-8 sm:mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-          <div className="text-center p-4 sm:p-6 md:p-8 bg-[#111827] border border-transparent hover:border-[#EB0028] transition-all duration-300 rounded-none">
+          <div className="text-center p-4 sm:p-6 md:p-8 bg-neutral-900 border border-neutral-800 hover:border-[#EB0028] transition-all duration-300 rounded-none">
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EB0028] mb-2 sm:mb-3">6</div>
-            <div className="text-[#E2E8F0] font-medium text-xs sm:text-sm md:text-base">Inspiring Talks</div>
+            <div className="text-neutral-200 font-medium text-xs sm:text-sm md:text-base">Inspiring Talks</div>
           </div>
-          <div className="text-center p-4 sm:p-6 md:p-8 bg-[#111827] border border-transparent hover:border-[#EB0028] transition-all duration-300 rounded-none">
+          <div className="text-center p-4 sm:p-6 md:p-8 bg-neutral-900 border border-neutral-800 hover:border-[#EB0028] transition-all duration-300 rounded-none">
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EB0028] mb-2 sm:mb-3">2</div>
-            <div className="text-[#E2E8F0] font-medium text-xs sm:text-sm md:text-base">Networking Breaks</div>
+            <div className="text-neutral-200 font-medium text-xs sm:text-sm md:text-base">Networking Breaks</div>
           </div>
-          <div className="text-center p-4 sm:p-6 md:p-8 bg-[#111827] border border-transparent hover:border-[#EB0028] transition-all duration-300 rounded-none">
+          <div className="text-center p-4 sm:p-6 md:p-8 bg-neutral-900 border border-neutral-800 hover:border-[#EB0028] transition-all duration-300 rounded-none">
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EB0028] mb-2 sm:mb-3">1</div>
-            <div className="text-[#E2E8F0] font-medium text-xs sm:text-sm md:text-base">Panel Discussion</div>
+            <div className="text-neutral-200 font-medium text-xs sm:text-sm md:text-base">Panel Discussion</div>
           </div>
-          <div className="text-center p-4 sm:p-6 md:p-8 bg-[#111827] border border-transparent hover:border-[#EB0028] transition-all duration-300 rounded-none">
+          <div className="text-center p-4 sm:p-6 md:p-8 bg-neutral-900 border border-neutral-800 hover:border-[#EB0028] transition-all duration-300 rounded-none">
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#EB0028] mb-2 sm:mb-3">9 hrs</div>
-            <div className="text-[#E2E8F0] font-medium text-xs sm:text-sm md:text-base">Full Experience</div>
+            <div className="text-neutral-200 font-medium text-xs sm:text-sm md:text-base">Full Experience</div>
           </div>
         </div>
       </div>

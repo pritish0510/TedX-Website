@@ -129,14 +129,14 @@ const Registration = () => {
 
   if (isSuccess) {
     return (
-      <section id="register" ref={sectionRef} className="section-padding bg-[#0B1120]">
+      <section id="register" ref={sectionRef} className="section-padding bg-transparent">
         <div className="max-w-4xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
-          <Card className="text-center p-6 sm:p-8 border-0 shadow-xl bg-[#111827] border border-[#5EEAD4] rounded-none">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#5EEAD4] rounded-none flex items-center justify-center mx-auto mb-4 sm:mb-6">
-              <Check className="w-6 h-6 sm:w-8 sm:h-8 text-[#0B1120]" />
+          <Card className="text-center p-6 sm:p-8 border-0 shadow-xl bg-neutral-900 border border-teal-400 rounded-none">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-teal-400 rounded-none flex items-center justify-center mx-auto mb-4 sm:mb-6">
+              <Check className="w-6 h-6 sm:w-8 sm:h-8 text-neutral-900" />
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Registration Successful!</h2>
-            <p className="text-base sm:text-lg text-[#E2E8F0] mb-6">
+            <p className="text-base sm:text-lg text-neutral-200 mb-6">
               Thank you for registering for TEDx SRMIST NCR Ghaziabad. We've sent a confirmation email with all the event details.
             </p>
             <Button
@@ -152,7 +152,7 @@ const Registration = () => {
   }
 
   return (
-    <section id="register" ref={sectionRef} className="section-padding bg-[#0B1120] relative overflow-hidden">
+    <section id="register" ref={sectionRef} className="section-padding bg-transparent relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-10 sm:top-20 right-5 sm:right-20 w-48 sm:w-64 md:w-96 h-48 sm:h-64 md:h-96 bg-[#EB0028] rounded-full blur-3xl"></div>
@@ -162,14 +162,14 @@ const Registration = () => {
       <div className="max-w-4xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12">
           <h2 ref={titleRef} className="heading-lg">
-            Register for <span className="text-[#EB0028]">TEDx</span> <span className="text-[#5EEAD4]">Happiness</span>
+            Register for <span className="text-[#EB0028]">TEDx</span> <span className="text-teal-400">Happiness</span>
           </h2>
           <p className="body-text max-w-4xl mx-auto px-2">
             Secure your spot at this transformative event focused on happiness and wellbeing. Registration is free but spaces are limited.
           </p>
         </div>
 
-        <Card ref={formRef} className="bg-[#111827] border border-transparent hover:border-[#EB0028] transition-all duration-300 rounded-none">
+        <Card ref={formRef} className="bg-neutral-900 border border-neutral-800 hover:border-[#EB0028] transition-all duration-300 rounded-none">
           <CardHeader className="bg-[#EB0028] text-white rounded-none">
             <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-center py-3 sm:py-4">Event Registration</CardTitle>
           </CardHeader>
@@ -177,14 +177,14 @@ const Registration = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
               {/* Name */}
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                <Label htmlFor="name" className="text-xs sm:text-sm font-medium text-neutral-200">
                   Full Name *
                 </Label>
                 <Input
                   id="name"
                   {...register('name')}
                   placeholder="Enter your full name"
-                  className="w-full bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                  className="w-full bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                 />
                 {errors.name && (
                   <p className="text-xs sm:text-sm text-red-600">{errors.name.message}</p>
@@ -193,7 +193,7 @@ const Registration = () => {
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                <Label htmlFor="email" className="text-xs sm:text-sm font-medium text-neutral-200">
                   Email Address *
                 </Label>
                 <Input
@@ -201,7 +201,7 @@ const Registration = () => {
                   type="email"
                   {...register('email')}
                   placeholder="Enter your email address"
-                  className="w-full bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                  className="w-full bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                 />
                 {errors.email && (
                   <p className="text-xs sm:text-sm text-red-600">{errors.email.message}</p>
@@ -210,14 +210,14 @@ const Registration = () => {
 
               {/* Phone */}
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                <Label htmlFor="phone" className="text-xs sm:text-sm font-medium text-neutral-200">
                   Phone Number *
                 </Label>
                 <Input
                   id="phone"
                   {...register('phone')}
                   placeholder="Enter your phone number"
-                  className="w-full bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                  className="w-full bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                 />
                 {errors.phone && (
                   <p className="text-xs sm:text-sm text-red-600">{errors.phone.message}</p>
@@ -226,14 +226,14 @@ const Registration = () => {
 
               {/* Role */}
               <div className="space-y-2">
-                <Label className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                <Label className="text-xs sm:text-sm font-medium text-neutral-200">
                   Role *
                 </Label>
                 <Select onValueChange={(value) => setValue('role', value)}>
-                  <SelectTrigger className="w-full bg-[#0B1120] border-[#1F2937] text-white focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none">
+                  <SelectTrigger className="w-full bg-neutral-950 border-neutral-800 text-white focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none">
                     <SelectValue placeholder="Select your role" />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#111827] border-[#1F2937] text-white rounded-none">
+                  <SelectContent className="bg-neutral-900 border-neutral-800 text-white rounded-none">
                     <SelectItem value="Student">Student</SelectItem>
                     <SelectItem value="Faculty">Faculty</SelectItem>
                     <SelectItem value="Professional">Professional</SelectItem>
@@ -247,7 +247,7 @@ const Registration = () => {
 
               {/* Message */}
               <div className="space-y-2">
-                <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-[#E2E8F0]">
+                <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-neutral-200">
                   Why do you want to attend TEDx SRMIST NCR Ghaziabad? *
                 </Label>
                 <Textarea
@@ -255,7 +255,7 @@ const Registration = () => {
                   {...register('message')}
                   placeholder="Tell us what excites you about this event and what you hope to gain..."
                   rows={4}
-                  className="w-full bg-[#0B1120] border-[#1F2937] text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                  className="w-full bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                 />
                 {errors.message && (
                   <p className="text-xs sm:text-sm text-red-600">{errors.message.message}</p>
@@ -278,8 +278,8 @@ const Registration = () => {
               </Button>
             </form>
 
-            <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-[#0B1120] border border-[#5EEAD4] rounded-none">
-              <p className="text-xs sm:text-sm text-[#5EEAD4]">
+            <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-neutral-950 border border-teal-400 rounded-none">
+              <p className="text-xs sm:text-sm text-teal-400">
                 <strong>Note:</strong> Registration is completely free. You'll receive a confirmation email with event details and your entry pass. Please register early as seats are limited.
               </p>
             </div>

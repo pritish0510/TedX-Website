@@ -148,7 +148,7 @@ const Speakers = () => {
   ];
 
   return (
-    <section id="speakers" ref={sectionRef} className="section-padding bg-[#0B1120] relative overflow-hidden">
+    <section id="speakers" ref={sectionRef} className="section-padding bg-transparent relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-20 sm:top-40 left-5 sm:left-10 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-[#EB0028] rounded-full blur-3xl"></div>
@@ -172,7 +172,7 @@ const Speakers = () => {
           {speakers.map((speaker, index) => (
             <Card
               key={index}
-              className="group bg-[#111827] border border-transparent overflow-hidden hover:shadow-[0_0_20px_rgba(94,234,212,0.4)] transition-all duration-300 hover:border-[#5EEAD4] rounded-none hover:-translate-y-2"
+              className="group bg-neutral-900 border border-neutral-800 overflow-hidden hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all duration-300 hover:border-teal-400 rounded-none hover:-translate-y-2"
             >
               <div className="relative overflow-hidden">
                 <img
@@ -202,14 +202,14 @@ const Speakers = () => {
               <CardContent className="p-4 sm:p-6">
                 <div className="mb-3">
                   <h3 className="text-lg sm:text-xl font-bold text-white mb-2">{speaker.name}</h3>
-                  <p className="text-[#EB0028] font-semibold text-xs sm:text-sm uppercase tracking-wider">{speaker.role}</p>
+                  <p className="text-yellow-500 font-semibold text-xs sm:text-sm uppercase tracking-wider">{speaker.role}</p>
                 </div>
 
-                <h4 className="text-sm sm:text-base md:text-lg font-semibold text-[#E2E8F0] mb-3 sm:mb-4 line-clamp-2">
+                <h4 className="text-sm sm:text-base md:text-lg font-semibold text-neutral-200 mb-3 sm:mb-4 line-clamp-2">
                   {speaker.topic}
                 </h4>
 
-                <p className="text-[#94A3B8] text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-3 leading-relaxed">
+                <p className="text-neutral-400 text-xs sm:text-sm mb-4 sm:mb-6 line-clamp-3 leading-relaxed">
                   {speaker.bio}
                 </p>
 
@@ -217,7 +217,7 @@ const Speakers = () => {
                   {speaker.tags.map((tag, tagIndex) => (
                     <Badge
                       key={tagIndex}
-                      className="bg-[#111827] text-[#5EEAD4] border border-[#5EEAD4]/30 hover:bg-[#5EEAD4] hover:text-[#0B1120] transition-all duration-300 text-xs px-2 py-1 rounded-none"
+                      className="bg-neutral-900 text-teal-400 border border-teal-400/30 hover:bg-teal-400 hover:text-neutral-900 transition-all duration-300 text-xs px-2 py-1 rounded-none"
                     >
                       {tag}
                     </Badge>
@@ -230,9 +230,9 @@ const Speakers = () => {
 
         {/* More Speakers Coming */}
         <div className="text-center mt-8 sm:mt-12 md:mt-16">
-          <div className="bg-[#111827] border border-[#EB0028] p-6 sm:p-8 md:p-12 rounded-none text-white hover:shadow-[0_0_20px_rgba(235,0,40,0.3)] transition-all duration-300">
+          <div className="bg-neutral-900 border border-[#EB0028] p-6 sm:p-8 md:p-12 rounded-none text-white hover:shadow-[0_0_20px_rgba(235,0,40,0.3)] transition-all duration-300">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6">More Amazing Speakers Coming Soon!</h3>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl opacity-90 text-[#E2E8F0]">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl opacity-90 text-neutral-200">
               We're curating an incredible lineup of speakers. Stay tuned for more announcements.
             </p>
           </div>

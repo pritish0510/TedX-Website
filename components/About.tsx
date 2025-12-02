@@ -139,7 +139,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="section-padding bg-[#0B1120] relative overflow-hidden"
+      className="section-padding bg-transparent relative overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -151,7 +151,7 @@ const About = () => {
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 ref={titleRef} className="heading-lg">
-            About <span className="text-[#EB0028]">TEDx</span> & <span className="text-[#5EEAD4]">Elysium</span>
+            About <span className="text-[#EB0028]">TEDx</span> & <span className="text-teal-400">Elysium</span>
           </h2>
           <p ref={descriptionRef} className="body-text max-w-4xl mx-auto px-2">
             TEDx events are independently organized TED-like gatherings that bring communities together
@@ -166,16 +166,16 @@ const About = () => {
           {features.map((feature, index) => (
             <Card
               key={index}
-              className="group bg-[#111827] border border-transparent hover:border-[#5EEAD4] transition-all duration-300 rounded-none hover:shadow-[0_0_20px_rgba(94,234,212,0.4)] hover:-translate-y-2"
+              className="group bg-neutral-900 border border-neutral-800 hover:border-teal-400 transition-all duration-300 rounded-none hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] hover:-translate-y-2"
             >
               <CardContent className="p-4 sm:p-6 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-[#0B1120] text-[#EB0028] mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-500 rounded-none border border-[#EB0028]">
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-neutral-950 text-[#EB0028] mb-4 sm:mb-6 group-hover:scale-110 transition-all duration-500 rounded-none border border-[#EB0028]">
                   {feature.icon}
                 </div>
                 <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-sm sm:text-base text-[#94A3B8] leading-relaxed">
+                <p className="text-sm sm:text-base text-neutral-400 leading-relaxed">
                   {feature.description}
                 </p>
               </CardContent>
@@ -185,11 +185,11 @@ const About = () => {
 
         {/* TEDx Mission */}
         <div className="mt-12 sm:mt-16 md:mt-20 text-center">
-          <div ref={missionRef} className="bg-[#111827] border border-[#EB0028] p-6 sm:p-8 md:p-12 lg:p-16 rounded-none hover:shadow-[0_0_30px_rgba(235,0,40,0.2)] transition-all duration-300">
+          <div ref={missionRef} className="bg-neutral-900 border border-[#EB0028] p-6 sm:p-8 md:p-12 lg:p-16 rounded-none hover:shadow-[0_0_30px_rgba(235,0,40,0.2)] transition-all duration-300">
             <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 md:mb-8">
               <span className="text-[#EB0028]">Divine Mission</span>
             </h3>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[#E2E8F0] max-w-4xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-200 max-w-4xl mx-auto leading-relaxed">
               To create a platform where brilliant minds converge to share transformative ideas,
               inspire action, and build a community of innovators who are passionate about making
               a positive impact on society. We believe that when great ideas meet great people,

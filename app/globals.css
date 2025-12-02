@@ -3,12 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --bg-main: #0B1120;
-  --bg-card: #111827;
-  --text-primary: #E2E8F0;
+  --bg-main: #0a0a0a;
+  /* neutral-950 */
+  --bg-card: #171717;
+  /* neutral-900 */
+  --text-primary: #e5e5e5;
+  /* neutral-200 */
   --text-heading: #FFFFFF;
-  --accent-gold: #FFD700;
-  --accent-teal: #5EEAD4;
+  --accent-gold: #eab308;
+  /* yellow-500 */
+  --accent-teal: #2dd4bf;
+  /* teal-400 */
   --ted-red: #EB0028;
   --white: #FFFFFF;
 }
@@ -25,8 +30,8 @@
 
   body {
     @apply bg-background text-foreground;
-    background-color: var(--bg-main);
-    color: var(--text-primary);
+    @apply bg-gradient-to-b from-neutral-950 to-neutral-800 text-neutral-200 min-h-screen;
+    background-attachment: fixed;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     overflow-x: hidden;
   }
@@ -37,7 +42,7 @@
   h4,
   h5,
   h6 {
-    color: var(--text-heading);
+    @apply text-white;
     font-weight: 700;
   }
 }
@@ -64,18 +69,15 @@
   }
 
   .body-text {
-    @apply text-base md:text-lg text-gray-300 leading-relaxed;
+    @apply text-base md:text-lg text-neutral-200 leading-relaxed;
   }
 
   .btn-primary {
-    @apply bg-primary text-white px-6 py-3 font-bold transition-all duration-300 hover:shadow-glow-teal hover:-translate-y-1;
-    background-color: var(--ted-red);
+    @apply bg-[#EB0028] text-white px-6 py-3 font-bold transition-all duration-300 hover:bg-[#c71b23] hover:-translate-y-1;
   }
 
   .card-elysium {
-    @apply bg-card p-6 transition-all duration-300 hover:border-accent hover:shadow-glow-teal hover:-translate-y-1;
-    background-color: var(--bg-card);
-    border: 1px solid transparent;
+    @apply bg-neutral-900 border border-neutral-800 p-6 transition-all duration-300 hover:border-teal-400 hover:shadow-[0_0_20px_rgba(45, 212, 191, 0.2)] hover:-translate-y-1;
   }
 }
 
@@ -107,7 +109,7 @@ html.lenis body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-main);
+  @apply bg-neutral-950;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -120,21 +122,27 @@ html.lenis body {
 
 /* Utilities */
 .text-gold {
-  color: var(--accent-gold);
+  @apply text-yellow-500;
 }
 
 .text-teal {
-  color: var(--accent-teal);
+  @apply text-teal-400;
 }
 
 .border-teal {
-  border-color: var(--accent-teal);
+  @apply border-teal-400;
 }
 
 .bg-main {
-  background-color: var(--bg-main);
+  @apply bg-transparent;
 }
 
 .bg-card-custom {
-  background-color: var(--bg-card);
+  @apply bg-neutral-900 border border-neutral-800;
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 120px;
 }

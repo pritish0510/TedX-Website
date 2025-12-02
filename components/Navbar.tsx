@@ -54,14 +54,14 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#0B1120] shadow-2xl border-b border-[#111827]' : 'bg-[#0B1120]'
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-neutral-950/95 backdrop-blur-md shadow-2xl border-b border-neutral-800' : 'bg-neutral-950/95 backdrop-blur-md border-b border-neutral-800'
       }`}>
       <div className="max-w-7xl mx-auto px-3 xs:px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-black text-[#EB0028] font-sans tracking-tighter">
-              TEDx<span className="text-white hidden xs:inline">SRMIST</span><span className="text-white hidden sm:inline"> NCR</span>
+              TED<sup>x</sup>
             </Link>
           </div>
 
@@ -84,7 +84,7 @@ const Navbar = () => {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <Button
-              className="bg-[#EB0028] hover:bg-[#c40022] text-white px-6 py-2 text-sm xl:text-base font-bold transition-all duration-300 hover:shadow-[0_0_20px_rgba(94,234,212,0.4)] border-none rounded-none"
+              className="bg-[#EB0028] hover:bg-[#c71b23] text-white px-6 py-2 text-sm xl:text-base font-bold transition-all duration-300 hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] border-none rounded-none"
               onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Register Now
@@ -107,7 +107,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <div
           ref={menuRef}
-          className="lg:hidden bg-[#0B1120] border-t border-[#111827] overflow-hidden hidden"
+          className="lg:hidden bg-black/70 border-t border-neutral-800 overflow-hidden hidden backdrop-blur-md"
           style={{ height: 0, opacity: 0 }}
         >
           <div className="px-3 xs:px-4 pt-4 pb-6 space-y-2">
@@ -115,7 +115,7 @@ const Navbar = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-white hover:text-[#EB0028] block px-3 xs:px-4 py-3 text-sm xs:text-base font-bold hover:bg-[#111827] transition-all duration-300 border-l-2 border-transparent hover:border-[#EB0028]"
+                className="text-white hover:text-[#EB0028] block px-3 xs:px-4 py-3 text-sm xs:text-base font-bold hover:bg-neutral-900 transition-all duration-300 border-l-2 border-transparent hover:border-[#EB0028]"
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
@@ -123,7 +123,7 @@ const Navbar = () => {
             ))}
             <div className="px-3 xs:px-4 py-4">
               <Button
-                className="bg-[#EB0028] hover:bg-[#c40022] text-white w-full py-3 text-sm xs:text-base font-bold rounded-none hover:shadow-[0_0_20px_rgba(94,234,212,0.4)]"
+                className="bg-[#EB0028] hover:bg-[#c71b23] text-white w-full py-3 text-sm xs:text-base font-bold rounded-none hover:shadow-[0_0_20px_rgba(45,212,191,0.2)]"
                 onClick={() => {
                   setIsOpen(false);
                   document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
