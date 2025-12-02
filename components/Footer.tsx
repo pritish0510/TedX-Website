@@ -107,7 +107,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 text-neutral-400">
+            {/* <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 text-neutral-400">
               <a href="#" className="hover:text-white transition-colors duration-200">
                 Privacy Policy
               </a>
@@ -117,7 +117,7 @@ const Footer = () => {
               <a href="#" className="hover:text-white transition-colors duration-200">
                 Code of Conduct
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

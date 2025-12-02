@@ -246,8 +246,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Email</h4>
-                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">tedx@srmist.edu.in</p>
-                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">info@tedxsrmist.edu.in</p>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">tedxsrmistdelhincr@gmail.com</p>
                   </div>
                 </div>
 
@@ -257,8 +256,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Phone</h4>
-                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">+91 9876543210</p>
-                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">+91 9876543211</p>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">+91 7048950618</p>
+                    <p className="text-neutral-400 text-xs sm:text-sm md:text-base">+91 80520899831</p>
                   </div>
                 </div>
 
@@ -270,7 +269,7 @@ const Contact = () => {
                     <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Address</h4>
                     <p className="text-neutral-400 text-xs sm:text-sm md:text-base">
                       SRM Institute of Science and Technology,<br />
-                      SRM IST NCR Campus, Delhi-Meerut Road,<br />
+                      Delhi-Meerut Road,
                       Modinagar, Ghaziabad District,<br />
                       Uttar Pradesh, 201204.
                     </p>
@@ -284,9 +283,8 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-white text-sm sm:text-base md:text-lg">Office Hours</h4>
                     <p className="text-neutral-400 text-xs sm:text-sm md:text-base">
-                      Monday - Friday: 9:00 AM - 6:00 PM<br />
-                      Saturday: 10:00 AM - 4:00 PM<br />
-                      Sunday: Closed
+                      Monday - Friday: 9:20 AM - 4:00 PM<br />
+                      Saturday - Sunday:  Closed
                     </p>
                   </div>
                 </div>

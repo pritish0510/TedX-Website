@@ -248,7 +248,7 @@ const Registration = () => {
               {/* Message */}
               <div className="space-y-2">
                 <Label htmlFor="message" className="text-xs sm:text-sm font-medium text-neutral-200">
-                  Why do you want to attend TED<sup>x</sup> SRMIST NCR Ghaziabad? *
+                  Why do you want to attend TED<sup>x</sup> SRMIST Delhi NCR? *
                 </Label>
                 <Textarea
                   id="message"
