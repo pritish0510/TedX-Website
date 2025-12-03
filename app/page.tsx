@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
@@ -15,16 +15,15 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import { Toaster } from '@/components/ui/toaster';
 
-// Register GSAP plugins
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, SplitText);
 }
 
 export default function Home() {
   useEffect(() => {
-
     const ctx = gsap.context(() => {
-      // Magnetic effect for buttons (without custom cursor)
+    
       const magneticElements = document.querySelectorAll('.magnetic');
       magneticElements.forEach((element) => {
         element.addEventListener('mouseleave', () => {
@@ -39,15 +38,12 @@ export default function Home() {
         });
       });
 
-      // Scroll-triggered reveal animations
+     
       const revealElements = document.querySelectorAll('.reveal');
       revealElements.forEach((element) => {
-        gsap.fromTo(element,
-          {
-            opacity: 0,
-            y: 100,
-            scale: 0.95
-          },
+        gsap.fromTo(
+          element,
+          { opacity: 0, y: 100, scale: 0.95 },
           {
             opacity: 1,
             y: 0,
@@ -57,13 +53,13 @@ export default function Home() {
             scrollTrigger: {
               trigger: element,
               start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            }
+              toggleActions: 'play none none reverse',
+            },
           }
         );
       });
 
-      // Parallax effects
+    
       const parallaxElements = document.querySelectorAll('.parallax');
       parallaxElements.forEach((element) => {
         gsap.to(element, {
@@ -73,24 +69,21 @@ export default function Home() {
             trigger: element,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: true
-          }
+            scrub: true,
+          },
         });
       });
 
-      // Refresh ScrollTrigger
       ScrollTrigger.refresh();
     });
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
     <>
       <Navbar />
-      <main>
+      <main className="flex-1">
         <Hero />
         <About />
         <Speakers />

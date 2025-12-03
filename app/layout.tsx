@@ -37,16 +37,6 @@ export const metadata: Metadata = {
     images: ['https://tedxsrmistncr.com/og-image.jpg'],
     creator: '@tedxsrmistncr',
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
-  category: 'Education',
-  classification: 'Educational Event',
-  other: {
-    'event:start_time': '2025-03-15T09:00:00+05:30',
-    'event:end_time': '2025-03-15T18:00:00+05:30',
-    'event:location': 'SRMIST NCR Campus, Ghaziabad, India',
-  },
 };
 
 export default function RootLayout({
@@ -55,19 +45,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#EB0028" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
+
       <body className="font-sans antialiased selection:bg-[#EB0028] selection:text-white">
         <InitialLoader />
         <SmoothScroll>
-          {children}
+          <div className="flex flex-col min-h-screen">
+            {children}
+          </div>
         </SmoothScroll>
       </body>
     </html>

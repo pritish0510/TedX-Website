@@ -25,7 +25,7 @@
 
   html {
     scroll-behavior: auto;
-    /* Let Lenis handle smooth scroll */
+ 
   }
 
   body {
@@ -81,7 +81,7 @@
   }
 }
 
-/* Lenis Smooth Scroll */
+
 html.lenis,
 html.lenis body {
   height: auto;
@@ -103,7 +103,7 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -120,7 +120,7 @@ html.lenis body {
   background: #c41e0f;
 }
 
-/* Utilities */
+
 .text-gold {
   @apply text-yellow-500;
 }
@@ -147,7 +147,7 @@ html.lenis body {
   background-size: 120px;
 }
 
-/* Loading Screen Styles */
+
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -213,7 +213,7 @@ html.lenis body {
   }
 }
 
-/* Custom Scrollbar for Team Members */
+
 .scrollbar-thin::-webkit-scrollbar {
   height: 8px;
 }
@@ -230,4 +230,38 @@ html.lenis body {
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #c71b23;
+}
+
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
+}
+
+#__next {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+html.lenis,
+html.lenis body {
+  height: auto;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
+}
+
+
+.h-screen,
+[class*="h-screen"] {
+  height: 100dvh !important;
+  min-height: 100dvh !important;
 }
