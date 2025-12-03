@@ -128,8 +128,8 @@ export default function Hero() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="text-center">
           <div className="animate-pulse">
-            <div className="h-16 bg-[#111827] w-64 mx-auto mb-4"></div>
-            <div className="h-8 bg-[#111827] w-48 mx-auto mb-8"></div>
+            <div className="h-16 bg-neutral-900 w-64 mx-auto mb-4"></div>
+            <div className="h-8 bg-neutral-900 w-48 mx-auto mb-8"></div>
           </div>
         </div>
       </section>

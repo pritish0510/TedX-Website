@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { 
+      {
         message: 'Registration successful! Confirmation email sent.',
         registrationId: registration.id
       },
@@ -84,11 +84,11 @@ export async function GET(request: NextRequest) {
     }
 
     const result = await pool.query(
-      'SELECT id, name, email, phone, role, message, created_at FROM registrations ORDER BY created_at DESC'
+      'SELECT id, name, email, phone, role, message, selected, selected_at, created_at FROM registrations ORDER BY created_at DESC'
     );
 
     return NextResponse.json(
-      { 
+      {
         registrations: result.rows,
         total: result.rows.length
       },

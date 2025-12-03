@@ -64,7 +64,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#EB0028" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
-      <body className="font-sans bg-[#0a0a0a] text-[#E2E8F0] antialiased selection:bg-[#EB0028] selection:text-white">
+      <body className="font-sans antialiased selection:bg-[#EB0028] selection:text-white">
         <InitialLoader />
         <SmoothScroll>
           {children}

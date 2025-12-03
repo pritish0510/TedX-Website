@@ -210,7 +210,7 @@ const Schedule = () => {
       case 'break': return 'bg-teal-400 text-neutral-900';
       case 'ceremony': return 'bg-yellow-500 text-neutral-900';
       case 'panel': return 'bg-neutral-200 text-neutral-900';
-      default: return 'bg-gray-500 text-white';
+      default: return 'bg-neutral-500 text-white';
     }
   };
 

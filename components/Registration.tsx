@@ -184,7 +184,7 @@ const Registration = () => {
                   id="name"
                   {...register('name')}
                   placeholder="Enter your full name"
-                  className="w-full bg-neutral-950 border-neutral-800 text-white placeholder-gray-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
+                  className="w-full bg-neutral-950 border-neutral-800 text-white placeholder-neutral-500 focus:border-[#EB0028] focus:ring-[#EB0028] text-sm sm:text-base rounded-none"
                 />
                 {errors.name && (
                   <p className="text-xs sm:text-sm text-red-600">{errors.name.message}</p>

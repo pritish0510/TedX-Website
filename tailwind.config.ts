@@ -21,39 +21,39 @@ const config: Config = {
         DEFAULT: '0px',
       },
       colors: {
-        background: 'neutral-950',
-        foreground: '#E2E8F0',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         card: {
-          DEFAULT: '#111827',
-          foreground: '#E2E8F0',
+          DEFAULT: '#171717', // neutral-900
+          foreground: '#e5e5e5', // neutral-200
         },
         popover: {
-          DEFAULT: '#111827',
-          foreground: '#E2E8F0',
+          DEFAULT: '#171717', // neutral-900
+          foreground: '#e5e5e5', // neutral-200
         },
         primary: {
           DEFAULT: '#EB0028',
           foreground: '#FFFFFF',
         },
         secondary: {
-          DEFAULT: '#111827',
-          foreground: '#E2E8F0',
+          DEFAULT: '#262626', // neutral-800
+          foreground: '#e5e5e5', // neutral-200
         },
         muted: {
-          DEFAULT: '#111827',
-          foreground: '#94A3B8',
+          DEFAULT: '#262626', // neutral-800
+          foreground: '#a3a3a3', // neutral-400
         },
         accent: {
-          DEFAULT: '#5EEAD4',
+          DEFAULT: '#5EEAD4', // teal-400
           foreground: '#0a0a0a',
         },
         destructive: {
           DEFAULT: '#EB0028',
           foreground: '#FFFFFF',
         },
-        border: '#111827',
-        input: '#111827',
-        ring: '#EB0028',
+        border: '#262626', // neutral-800
+        input: '#171717', // neutral-900
+        ring: '#5EEAD4', // teal-400
 
         // TEDx Brand Colors
         'tedx': {
@@ -66,9 +66,10 @@ const config: Config = {
         'teal': {
           DEFAULT: '#5EEAD4',
           light: '#2DD4BF',
+          400: '#5EEAD4',
         },
 
-        // Background Neutrals
+        // Background Neutrals (keeping Tailwind defaults)
         'neutral': {
           950: '#0a0a0a',
           900: '#171717',
@@ -80,6 +81,11 @@ const config: Config = {
           300: '#d4d4d4',
           200: '#e5e5e5',
           100: '#f5f5f5',
+        },
+
+        // Gold for roles/icons
+        'yellow': {
+          500: '#eab308',
         },
 
         // Sponsorship Tier Colors

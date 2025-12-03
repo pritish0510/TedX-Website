@@ -17,6 +17,8 @@ interface Registration {
   phone: string;
   role: string;
   message: string;
+  selected?: boolean;
+  selected_at?: string;
   created_at?: string;
   createdAt?: string;
 }
@@ -73,7 +75,7 @@ const AdminPage = () => {
     let filtered = registrations;
 
     if (searchTerm) {
-      filtered = filtered.filter(reg => 
+      filtered = filtered.filter(reg =>
         reg.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
         reg.phone.includes(searchTerm)
@@ -88,7 +90,7 @@ const AdminPage = () => {
   }, [registrations, searchTerm, filterRole]);
 
   const exportToCSV = () => {
-    const headers = ['Name', 'Email', 'Phone', 'Role', 'Message', 'Registration Date'];
+    const headers = ['Name', 'Email', 'Phone', 'Role', 'Message', 'Registration Date', 'Selected'];
     const csvContent = [
       headers.join(','),
       ...filteredRegistrations.map(reg => [
@@ -98,6 +100,7 @@ const AdminPage = () => {
         `"${reg.role}"`,
         `"${reg.message.replace(/"/g, '""')}"`,
         `"${new Date(reg.created_at || reg.createdAt || '').toLocaleString()}"`,
+        `"${reg.selected ? 'Yes' : 'No'}"`,
       ].join(','))
     ].join('\n');
 
@@ -110,9 +113,54 @@ const AdminPage = () => {
     window.URL.revokeObjectURL(url);
   };
 
+  const handleSelectParticipant = async (participantId: number | string | undefined, currentSelected: boolean) => {
+    if (!participantId) return;
+
+    try {
+      const response = await fetch('/api/select-participant', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          participantId,
+          selected: !currentSelected,
+        }),
+      });
+
+      if (response.ok) {
+        // Update local state
+        setRegistrations(prev =>
+          prev.map(reg =>
+            (reg.id || reg._id) === participantId
+              ? { ...reg, selected: !currentSelected, selected_at: !currentSelected ? new Date().toISOString() : undefined }
+              : reg
+          )
+        );
+
+        toast({
+          title: !currentSelected ? "Participant Selected" : "Selection Removed",
+          description: !currentSelected
+            ? "Selection confirmation email has been sent to the participant."
+            : "Participant selection has been removed.",
+        });
+      } else {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to update selection');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to update participant selection",
+        variant: "destructive",
+      });
+    }
+  };
+
+
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center bg-neutral-900">
         <Card className="w-full max-w-md">
           <CardHeader>
             <CardTitle className="text-center">
@@ -132,7 +180,7 @@ const AdminPage = () => {
                   placeholder="Enter admin password"
                 />
               </div>
-              <Button 
+              <Button
                 onClick={handleAuth}
                 className="w-full bg-[#E62B1E] hover:bg-[#c41e0f]"
               >
@@ -159,14 +207,14 @@ const AdminPage = () => {
   }, {} as Record<string, number>);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-neutral-950 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h1 className="text-3xl font-bold text-white">
             <span className="text-[#E62B1E]">TEDx</span> Admin Dashboard
           </h1>
-          <p className="text-gray-600 mt-2">Manage event registrations and view analytics</p>
+          <p className="text-neutral-400 mt-2">Manage event registrations and view analytics</p>
         </div>
 
         {/* Stats Cards */}
@@ -174,16 +222,16 @@ const AdminPage = () => {
           <Card>
             <CardContent className="p-6 text-center">
               <Users className="w-8 h-8 text-[#E62B1E] mx-auto mb-2" />
-              <div className="text-2xl font-bold text-gray-900">{registrations.length}</div>
-              <div className="text-sm text-gray-600">Total Registrations</div>
+              <div className="text-2xl font-bold text-white">{registrations.length}</div>
+              <div className="text-sm text-neutral-400">Total Registrations</div>
             </CardContent>
           </Card>
 
           {Object.entries(roleStats).map(([role, count]) => (
             <Card key={role}>
               <CardContent className="p-6 text-center">
-                <div className="text-2xl font-bold text-gray-900">{count}</div>
-                <div className="text-sm text-gray-600">{role}s</div>
+                <div className="text-2xl font-bold text-white">{count}</div>
+                <div className="text-sm text-neutral-400">{role}s</div>
               </CardContent>
             </Card>
           ))}
@@ -196,7 +244,7 @@ const AdminPage = () => {
               <div className="flex-1">
                 <Label htmlFor="search">Search Registrations</Label>
                 <div className="relative">
-                  <Search className="w-4 h-4 absolute left-3 top-3 text-gray-400" />
+                  <Search className="w-4 h-4 absolute left-3 top-3 text-neutral-400" />
                   <Input
                     id="search"
                     placeholder="Search by name, email, or phone"
@@ -213,7 +261,7 @@ const AdminPage = () => {
                   id="filter"
                   value={filterRole}
                   onChange={(e) => setFilterRole(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#E62B1E] focus:border-[#E62B1E]"
+                  className="w-full px-3 py-2 border border-neutral-700 bg-neutral-900 text-white rounded-md focus:ring-2 focus:ring-[#E62B1E] focus:border-[#E62B1E]"
                 >
                   <option value="">All Roles</option>
                   <option value="Student">Student</option>
@@ -224,7 +272,7 @@ const AdminPage = () => {
               </div>
 
               <div className="flex items-end">
-                <Button 
+                <Button
                   onClick={exportToCSV}
                   className="bg-[#E62B1E] hover:bg-[#c41e0f] flex items-center gap-2"
                 >
@@ -248,6 +296,7 @@ const AdminPage = () => {
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
+                    <th className="text-left py-3 px-4 font-semibold">Selected</th>
                     <th className="text-left py-3 px-4 font-semibold">Name</th>
                     <th className="text-left py-3 px-4 font-semibold">Email</th>
                     <th className="text-left py-3 px-4 font-semibold">Phone</th>
@@ -258,18 +307,26 @@ const AdminPage = () => {
                 </thead>
                 <tbody>
                   {filteredRegistrations.map((registration) => (
-                    <tr key={registration.id || registration._id} className="border-b hover:bg-gray-50">
+                    <tr key={registration.id || registration._id} className={`border-b border-neutral-800 hover:bg-neutral-800 ${registration.selected ? 'bg-green-900/20' : ''}`}>
+                      <td className="py-3 px-4">
+                        <input
+                          type="checkbox"
+                          checked={registration.selected || false}
+                          onChange={() => handleSelectParticipant(registration.id || registration._id, registration.selected || false)}
+                          className="w-4 h-4 text-[#E62B1E] bg-neutral-900 border-neutral-700 rounded focus:ring-[#E62B1E] focus:ring-2 cursor-pointer"
+                        />
+                      </td>
                       <td className="py-3 px-4 font-medium">{registration.name}</td>
                       <td className="py-3 px-4">{registration.email}</td>
                       <td className="py-3 px-4">{registration.phone}</td>
                       <td className="py-3 px-4">
                         <Badge variant="secondary">{registration.role}</Badge>
                       </td>
-                      <td className="py-3 px-4 text-sm text-gray-600">
+                      <td className="py-3 px-4 text-sm text-neutral-400">
                         {new Date(registration.created_at || registration.createdAt || '').toLocaleDateString()}
                       </td>
                       <td className="py-3 px-4 max-w-xs">
-                        <p className="text-sm text-gray-600 line-clamp-2">
+                        <p className="text-sm text-neutral-400 line-clamp-2">
                           {registration.message}
                         </p>
                       </td>
@@ -279,7 +336,7 @@ const AdminPage = () => {
               </table>
 
               {filteredRegistrations.length === 0 && (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-neutral-400">
                   No registrations found matching your criteria.
                 </div>
               )}

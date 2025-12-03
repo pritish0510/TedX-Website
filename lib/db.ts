@@ -26,6 +26,8 @@ export async function initDatabase() {
         phone VARCHAR(20) NOT NULL,
         role VARCHAR(50) NOT NULL CHECK (role IN ('Student', 'Faculty', 'Guest', 'Professional')),
         message TEXT NOT NULL,
+        selected BOOLEAN DEFAULT FALSE,
+        selected_at TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
