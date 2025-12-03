@@ -52,71 +52,15 @@ export default function Hero() {
     if (!mounted) return;
 
     const ctx = gsap.context(() => {
-      // Hero text animations
-      gsap.fromTo('.hero-title',
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: 'power3.out',
-          stagger: 0.1
-        }
-      );
+      gsap.fromTo('.hero-title', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', stagger: 0.1 });
+      gsap.fromTo('.hero-subtitle', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1, delay: 0.4, ease: 'power3.out' });
+      gsap.fromTo('.countdown-card', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, delay: 0.8, stagger: 0.1, ease: 'power2.out' });
 
-      gsap.fromTo('.hero-subtitle',
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.4,
-          ease: 'power3.out'
-        }
-      );
-
-      // Countdown cards animation
-      gsap.fromTo('.countdown-card',
-        {
-          opacity: 0,
-          y: 30
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: 0.8,
-          stagger: 0.1,
-          ease: 'power2.out'
-        }
-      );
-
-      // Button hover effects
       const buttons = document.querySelectorAll('.elysium-btn');
       buttons.forEach((button) => {
         const btn = button as HTMLElement;
-
-        btn.addEventListener('mouseenter', () => {
-          gsap.to(btn, {
-            boxShadow: '0 0 20px rgba(94, 234, 212, 0.4)',
-            y: -2,
-            duration: 0.3
-          });
-        });
-
-        btn.addEventListener('mouseleave', () => {
-          gsap.to(btn, {
-            boxShadow: 'none',
-            y: 0,
-            duration: 0.3
-          });
-        });
+        btn.addEventListener('mouseenter', () => gsap.to(btn, { boxShadow: '0 0 20px rgba(94, 234, 212, 0.4)', y: -2, duration: 0.3 }));
+        btn.addEventListener('mouseleave', () => gsap.to(btn, { boxShadow: 'none', y: 0, duration: 0.3 }));
       });
     });
 
@@ -125,38 +69,37 @@ export default function Hero() {
 
   if (!mounted) {
     return (
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="text-center">
-          <div className="animate-pulse">
-            <div className="h-16 bg-neutral-900 w-64 mx-auto mb-4"></div>
-            <div className="h-8 bg-neutral-900 w-48 mx-auto mb-8"></div>
-          </div>
+      <section className="relative min-h-screen pt-32 flex items-center justify-center overflow-hidden">
+        <div className="text-center animate-pulse">
+          <div className="h-16 bg-neutral-900 w-64 mx-auto mb-4 rounded"></div>
+          <div className="h-8 bg-neutral-900 w-48 mx-auto rounded"></div>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="relative min-h-screen bg-transparent flex items-center justify-center overflow-hidden section-padding">
-      {/* Subtle Starry Background (CSS generated) */}
+    <section className="relative min-h-screen pt-24 md:pt-32 lg:pt-40 flex items-center justify-center overflow-hidden">
+      {/* zoom and above */}
+
+      {/* Starry background */}
       <div className="absolute inset-0 pointer-events-none opacity-20" style={{
         backgroundImage: 'radial-gradient(white 1px, transparent 1px)',
         backgroundSize: '50px 50px'
       }}></div>
 
-      {/* Main Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        {/* TEDx Logo and Title */}
         <div className="mb-8 sm:mb-12">
           <h1 className="hero-title heading-xl text-[#EB0028]">
-            TED<sup className="text-[#EB0028] text-3xl md:text-5xl ml-1">x</sup> <span className="text-white">SRMIST Delhi NCR</span>
+            TED<sup className="text-[#EB0028] text-3xl md:text-5xl ml-1">x</sup>{' '}
+            <span className="text-white">SRMIST Delhi NCR</span>
           </h1>
           <p className="hero-subtitle body-text text-xl font-medium mt-6">
             Theme: <span className="text-white font-bold">Elysium</span> (Mystical Dark Paradise)
           </p>
         </div>
 
-        {/* Event Details */}
+        {/* Rest unchanged */}
         <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-4xl mx-auto">
           <div className="flex items-center justify-center space-x-2 sm:space-x-3 text-neutral-200">
             <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-[#EB0028]" />
@@ -176,7 +119,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Countdown Timer */}
         <div className="mb-8 sm:mb-12">
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 sm:mb-8">
             Event Starts In
@@ -187,7 +129,7 @@ export default function Hero() {
               { label: 'Hours', value: timeLeft.hours },
               { label: 'Minutes', value: timeLeft.minutes },
               { label: 'Seconds', value: timeLeft.seconds }
-            ].map((item, index) => (
+            ].map((item) => (
               <div
                 key={item.label}
                 className="countdown-card bg-neutral-900 border border-neutral-800 p-3 sm:p-4 md:p-6 hover:border-teal-400 hover:shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all duration-300 rounded-none"
@@ -203,7 +145,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
           <a
             href="#register"
